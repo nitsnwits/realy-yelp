@@ -34,6 +34,12 @@ headersList = ["num_of_morning_visits", "num_of_evening_visits", "num_of_afterno
 }
 """
 
+def string(object):
+	if(type(object) is unicode):
+		return '"' + str(object) + '"'
+	else:
+		return str(object)
+
 def getBaselineDictionary():
 	"""
 	returns an output dictionary, similar to one line of the needed csv
@@ -49,7 +55,7 @@ def dictToCsv(dictionary):
 	"""
 	Given a dictionary, serializes it to a csv string, dictionary is similar to baseline dictionary
 	"""
-	csvString = str(dictionary[headersList[0]]) + "," + str(dictionary[headersList[1]]) + "," + str(dictionary[headersList[2]]) + "," + str(dictionary[headersList[3]]) + "," + str(dictionary[headersList[4]]) + "," + str(dictionary[headersList[5]]) + "\n"
+	csvString = string(dictionary[headersList[0]]) + "," + string(dictionary[headersList[1]]) + "," + string(dictionary[headersList[2]]) + "," + string(dictionary[headersList[3]]) + "," + string(dictionary[headersList[4]]) + "," + string(dictionary[headersList[5]]) + "\n"
 	return csvString
 
 
