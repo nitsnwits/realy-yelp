@@ -12,7 +12,7 @@ outputDataFramesList = []
 # TODO: abstract all constants to one file later
 dataset = "/Users/neerajsharma/Downloads/yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_business.json"
 output_csv = "business_meta.csv"
-headersList = ["business_id", "business_name", "latitude", "longitude", "address", "city", "state", "hours", "attributes"]
+headersList = ["business_id", "business_name", "latitude", "longitude", "address", "city", "state", "hours"]
 
 """"
 {
@@ -54,6 +54,9 @@ def getBaselineDictionary():
 
 def string(object):
 	if(type(object) is unicode):
+		object = object.encode('utf-8')
+		return '"' + str(object) + '"'
+	elif(type(object) is dict):
 		return '"' + str(object) + '"'
 	else:
 		return str(object)
@@ -62,7 +65,7 @@ def dictToCsv(dictionary):
 	"""
 	Given a dictionary, serializes it to a csv string, dictionary is similar to baseline dictionary
 	"""
-	csvString = string(dictionary[headersList[0]]) + "," + string(dictionary[headersList[1]]) + "," + string(dictionary[headersList[2]]) + "," + string(dictionary[headersList[3]]) + "," + string(dictionary[headersList[4]]) + "," + string(dictionary[headersList[5]]) + "," + string(dictionary[headersList[6]]) + "," + string(dictionary[headersList[7]]) + "," + string(dictionary[headersList[8]]) + "\n"
+	csvString = string(dictionary[headersList[0]]) + "," + string(dictionary[headersList[1]]) + "," + string(dictionary[headersList[2]]) + "," + string(dictionary[headersList[3]]) + "," + string(dictionary[headersList[4]]) + "," + string(dictionary[headersList[5]]) + "," + string(dictionary[headersList[6]]) + "," + string(dictionary[headersList[7]]) + "," + "\n"
 	return csvString
 
 
@@ -77,21 +80,34 @@ def parseDataset():
 			outputDict = getBaselineDictionary()
 			
 			# cleanse DF as per reqs
-			outputDict["business_id"] = dataframe["business_id"]
-			outputDict["business_name"] = dataframe["name"]
-			outputDict["latitude"] = dataframe["latitude"]
-			outputDict["longitude"] = dataframe["longitude"]
-			outputDict["address"] = dataframe["full_address"].replace("\n", " ")
-			outputDict["city"] = dataframe["city"]
-			outputDict["state"] = dataframe["state"]
-			# outputDict["hours"] = 
-			# outputDict["attributes"] =
+			try:
+				outputDict["business_id"] = dataframe["business_id"]
+				outputDict["business_name"] = dataframe["name"]
+				outputDict["latitude"] = dataframe["latitude"]
+				outputDict["longitude"] = dataframe["longitude"]
+				outputDict["address"] = dataframe["full_address"].replace("\n", " ")
+				outputDict["city"] = dataframe["city"]
+				outputDict["state"] = dataframe["state"]
+				if not dataframe["hours"]:
+					outputDict["hours"] = {}
+				else:
+					hoursDict = {}
+					for day, timings in dataframe["hours"].iteritems():
+						for attr, time in timings.iteritems():
+							if(attr == "open"):
+								opentime = time
+							if(attr == "close"):
+								closetime = time
+						hoursDict[day] = str(opentime) + "-" + str(closetime)
+					outputDict["hours"] = hoursDict
+			except:
+				print str(dataframe)
 
 			outputDataFramesList.append(outputDict)
 
 			# control limit for testing, uncomment to test code
-			if(len(outputDataFramesList) == 10):
-				break
+			# if(len(outputDataFramesList) == 10):
+			# 	break
 
 def writeOutputDataFramesToCsv(outputDataFramesList):
 	"""
