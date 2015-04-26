@@ -131,15 +131,17 @@ def parseReviews():
         for datarow in datarows:
             dataframe = json.loads(datarow)
             key = dataframe["user_id"]
+            globalDict[key].append([])
             for i in range(0, len(headersList)):
-                globalDict[key].append(0)
-            globalDict[key][user_id] = dataframe["user_id"]
-            globalDict[key][business_id] = dataframe["business_id"]
-            globalDict[key][review_id] = dataframe["review_id"]
-            globalDict[key][stars] = dataframe["stars"]
+                globalDict[key][-1].append(0)
+            globalDict[key][-1][user_id] = dataframe["user_id"]
+            globalDict[key][-1][business_id] = dataframe["business_id"]
+            globalDict[key][-1][review_id] = dataframe["review_id"]
+            globalDict[key][-1][stars] = dataframe["stars"]
 
             # control limit for testing, uncomment to test code
             # if controlExecution() == True:
+            #     print globalDict
             #     break
 
 def parseUsers():
@@ -152,8 +154,9 @@ def parseUsers():
             dataframe = json.loads(datarow)
             key = dataframe["user_id"]
             if key in globalDict:
-                globalDict[key][user_review_count] = dataframe["review_count"]
-                globalDict[key][user_avg] = dataframe["average_stars"]
+                for i in range(0, len(globalDict[key])):
+                    globalDict[key][i][user_review_count] = dataframe["review_count"]
+                    globalDict[key][i][user_avg] = dataframe["average_stars"]
 
 def parseBusiness():
     """
@@ -170,11 +173,13 @@ def parseBusiness():
 
     # update global dict with the info
     for user_id in globalDict:
-        temp_business_id = globalDict[user_id][business_id]
-        if temp_business_id in businessDict:
-            globalDict[user_id][business_avg] = businessDict[temp_business_id][0]
-            globalDict[user_id][business_review_count] = businessDict[temp_business_id][1]
-            globalDict[user_id][categories] = businessDict[temp_business_id][2]
+        for i in range(0, len(globalDict[user_id])):
+            temp_business_id = globalDict[user_id][i][business_id]
+            if temp_business_id in businessDict:
+                globalDict[user_id][i][business_avg] = businessDict[temp_business_id][0]
+                globalDict[user_id][i][business_review_count] = businessDict[temp_business_id][1]
+                globalDict[user_id][i][categories] = businessDict[temp_business_id][2]
+
 
 
 def writeOutputDataFramesToCsv(outputDict):
@@ -191,7 +196,8 @@ def writeOutputDataFramesToCsv(outputDict):
     # write data to csv file
     with open(output_csv, 'a') as csvFileHandler:
         for key in outputDict:
-            csvFileHandler.write(listToCsv(outputDict[key]))
+            for i in range(0, len(outputDict[key])):
+                csvFileHandler.write(listToCsv(outputDict[key][i]))
 
 def main():
     parseReviews()
