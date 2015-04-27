@@ -94,14 +94,16 @@ def getBaselineDictionary():
         outputDict[header] = 0
     return outputDict
 
-def string(object):
-    if(type(object) is unicode):
-        object = object.encode('utf-8')
-        return '"' + str(object) + '"'
-    elif(type(object) is dict):
-        return '"' + str(object) + '"'
+def string(element):
+    if(type(element) is unicode):
+        element = element.encode('utf-8')
+        return '"' + str(element) + '"'
+    elif(type(element) is dict):
+        return '"' + str(element) + '"'
+    elif(type(element) is list):
+        return '"' + str(":".join(element)) + '"'
     else:
-        return str(object)
+        return str(element)
 
 def dictToCsv(dictionary):
     """
@@ -141,7 +143,6 @@ def parseReviews():
 
             # control limit for testing, uncomment to test code
             # if controlExecution() == True:
-            #     print globalDict
             #     break
 
 def parseUsers():
