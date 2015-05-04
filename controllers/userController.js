@@ -18,7 +18,7 @@ var userModel = require("../models/userModel");
 
 module.exports.getRoot = function(req, res) {
 	logger.log('GET Request for URL: / received.');
-	res.render('../views/index.html');
+	res.render('../views/Landing.html');
 }
 
 module.exports.postUser = function(req, res) {
