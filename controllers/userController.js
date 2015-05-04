@@ -29,11 +29,6 @@ module.exports.postUser = function(req, res) {
 	}
 	
 	logger.log("POST /user request received." + JSON.stringify(req.body));
-	//encrypt information
-	// req.body.userName.firstName = crypto.createHash(algo).update(req.body.userName.firstName).digest('hex');
-	// req.body.userName.lastName = crypto.createHash(algo).update(req.body.userName.lastName).digest('hex');
-	// req.body.email = crypto.createHash(algo).update(req.body.email).digest('hex');
-	//req.body.password = crypto.createHash(algo).update(req.body.password).digest('hex');
 	userModel.dbCreateUser(req.body, function(error, newUser) {
 		if (error) {
 			logger.log('Error from database in POST user. ' + error);
@@ -44,7 +39,7 @@ module.exports.postUser = function(req, res) {
 			return res.render('errorpage', {layout: 'layout'});
 		}
 		logger.log('POST /user response: ' + JSON.stringify(newUser));
-		return res.render('chatpage', {layout: 'layout'});
+		return res.render('Home', {layout: 'layout'});
 	});
 }
 
@@ -82,7 +77,7 @@ module.exports.postLogin = function(req, res) {
 			return res.render('errorpage', {layout: 'layout'});
 		}
 		if (user.email === username && user.password === password) {
-			res.render('chatpage', {layout: 'layout'});
+			res.render('Home', {layout: 'layout'});
 			return;
 		} else {
 			res.locals.errorMessage = "Sorry " + username + ". We did not match any credentials. Do you want to try again?";
