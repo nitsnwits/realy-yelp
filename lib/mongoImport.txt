@@ -1,0 +1,6 @@
+mongoimport --db yelp --collection bar_sim --file ./bar_sim.json
+mongoimport --db yelp --collection books_sim --file ./books_sim.json
+mongoimport --db yelp --collection gym_sim --file ./gym_sim.json
+mongoimport --db yelp --collection rest_sim --file ./rest_sim.json
+mongoimport --db yelp --collection shopping_sim --file ./shopping_sim.json
+mongoimport --db yelp --collection business_meta --file ./business_meta.json
