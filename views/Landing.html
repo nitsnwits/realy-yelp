@@ -12,7 +12,8 @@
     <title>realy-yelp - we feed your hunger!</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link href="css/styles.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -64,6 +65,10 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    <li>
+                         <!-- <a class="page-scroll" href="#loginModal">Login/SignUp</a> -->
+                         <li><a data-toggle="modal" href="#loginModal"><u><b>Log In / Sign Up</b></u></a></li>   
+                    </li>     
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -264,6 +269,41 @@
             </div>
         </div>
     </section>
+
+<!--login modal-->
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>          
+          <h1 class="text-center">Login</h1>
+      </div>
+      <div class="modal-body">
+          <form class="form col-md-12 center-block" role="form" action="/login" method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control input-lg" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <!-- <button class="btn btn-primary btn-lg btn-block">Sign In</button> -->
+              <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in"/>
+              <!-- <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span> -->
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+          <div class="col-md-12">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          </div>    
+      </div>
+  </div>
+  </div>
+</div>    
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
