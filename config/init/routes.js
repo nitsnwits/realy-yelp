@@ -5,6 +5,7 @@
 */
 
 var userController = require('../../controllers/userController')
+	, errorController = require('../../controllers/errorController')
 	, baseurl = ''
 ;
 
