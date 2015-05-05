@@ -7,6 +7,7 @@
 var userController = require('../../controllers/userController')
 	, errorController = require('../../controllers/errorController')
 	, baseurl = ''
+	,reco_queries = require('../../models/reco_queries')
 ;
 
 module.exports = function(app, env) {
@@ -24,4 +25,7 @@ module.exports = function(app, env) {
 	// cpu status
 	app.get(baseurl + '/cpu', errorController.getCpu);
 	app.get(baseurl + '/cpu.json', errorController.getCpuJson);
+
+	//recommendation filtering queries
+	app.get(baseurl + '/recoTest',  reco_queries.)
 }
