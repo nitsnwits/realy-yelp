@@ -271,39 +271,122 @@
     </section>
 
 <!--login modal-->
-<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>          
-          <h1 class="text-center">Login</h1>
-      </div>
-      <div class="modal-body">
-          <form class="form col-md-12 center-block" role="form" action="/login" method="POST">
-            <div class="form-group">
-              <input type="text" class="form-control input-lg" placeholder="Email">
+ <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+      <div class="modal-dialog">      
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h3 class="modal-title text-primary" ><strong>Login</strong></h3>
+              </div>
+  
+              <div class="modal-body">
+                  <!-- The form is placed inside the body of modal -->
+                  <div class="panel-body">
+                    <form role="form" action="#" method="POST">
+                      <fieldset>
+                        <div class="row">
+                          <div class="center-block">
+                                  <img class="profile-img"
+                                          src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                            <div class="form-group">
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-user"></i>
+                                            </span> 
+                                            <input class="form-control" placeholder="Username" name="loginname" type="text" autofocus>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-lock"></i>
+                                            </span>
+                                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                    </div>
+                  <div class="form-group">
+                    <span><center><a data-toggle="modal" data-dismiss="modal" href="#registrationModal"><h5 class="modal-title text-primary" ><strong>Not Registered? Sign Up!</strong></h5></a></center></span>
+                  </div>
+              </div>
+              
+              <div class="modal-footer">
+                <div class="col-md-1accordion2">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>  
+              </div>
+              
             </div>
-            <div class="form-group">
-              <input type="password" class="form-control input-lg" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <!-- <button class="btn btn-primary btn-lg btn-block">Sign In</button> -->
-              <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in"/>
-              <!-- <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span> -->
-            </div>
-          </form>
+          </div>
       </div>
-      <div class="modal-footer">
-          <div class="col-md-12">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-          </div>    
-      </div>
-  </div>
-  </div>
-</div>    
+    </div>
+    <!--=========== END MODAL LOGIN ================-->
+    
+    <!--=========== BEGIN MODAL REGISTRATION ================-->
+    <div class="modal fade" tabindex="-1" id="registrationModal" aria-labelledby="Registration" aria-hidden="true">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                        <h3 class="panel-title">Sign up <small><font color="black">It's free!</font></small></h3>
+                        </div>
+                        <div class="panel-body">
+                        <form role="form">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <input type="submit" value="Register" class="btn btn-primary btn-block">
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <!--=========== END MODAL REGISTRATION ================-->
+
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
