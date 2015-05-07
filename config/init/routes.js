@@ -7,7 +7,7 @@
 var userController = require('../../controllers/userController')
 	, errorController = require('../../controllers/errorController')
 	, baseurl = ''
-	,reco_queries = require('../../models/reco_queries')
+	, apiController = require('../../controllers/apiController')
 ;
 
 module.exports = function(app, env) {
@@ -26,6 +26,17 @@ module.exports = function(app, env) {
 	app.get(baseurl + '/cpu', errorController.getCpu);
 	app.get(baseurl + '/cpu.json', errorController.getCpuJson);
 
-	//recommendation filtering queries
-	app.get(baseurl + '/recoTest',  reco_queries.)
+	//api's
+	app.get(baseurl + '/business/hotels/:hotel_id/similar', apiController.renderTemplate);
+	app.get(baseurl + '/business/hotels/:hotel_id/similar.json', apiController.getHotelJson);
+
+	// app.get(baseurl + '/business/gym/:gym_id/similar', apiController.renderTemplate);
+	// app.get(baseurl + '/business/gym/:gym_id/similar.json', apiController.getGymJson);
+
+	// app.get(baseurl + '/business/bars/:bar_id/similar', apiController.renderTemplate);
+	// app.get(baseurl + '/business/bars/:bar_id/similar.json', apiController.getBarJson);
+
+	// app.get(baseurl + '/business/books/:book_id/similar', apiController.renderTemplate);
+	// app.get(baseurl + '/business/books/:book_id/similar', apiController.getBookJson);
+
 }
