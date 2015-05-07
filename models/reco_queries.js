@@ -1,4 +1,4 @@
-
+/*
 function connect(databaseUrl){
 	
 	var db = new Db('yelp', new Server('localhost', 27017));
@@ -98,9 +98,8 @@ function budgetFilter(similar_items, budgetPreference){
 		}
 	}
 	return affordable;
-
-
 }
+
 function getCollection(db, category){
 	if(category == 'restaurant'){
 		return db.rest_sim
@@ -115,4 +114,4 @@ function getCollection(db, category){
 	}else if(category == 'buisness_meta'){
 		return db.buisness_meta
 	}
-}
+}*/

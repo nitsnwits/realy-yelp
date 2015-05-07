@@ -27,5 +27,5 @@ module.exports = function(app, env) {
 	app.get(baseurl + '/cpu.json', errorController.getCpuJson);
 
 	//recommendation filtering queries
-	app.get(baseurl + '/recoTest',  reco_queries.)
+	
 }
