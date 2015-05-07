@@ -20,17 +20,12 @@ sharedEnv.logger = logger;
 //App configruation, environment configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//var router = express.Router(); 
 
-// old config
-// app.use(express.cookieParser());
-// app.use(express.favicon());
-// app.use(express.bodyParser());
-// app.use(express.methodOverride());
-// app.use(app.router);
+// express config
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
-app.engine('html', ejs.__express);
+app.enable('view cache');
+app.engine('html', require('hogan-express'));
 app.use(express.static(__dirname + '/views'));
 
 //Set init configuration

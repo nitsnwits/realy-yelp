@@ -26,17 +26,20 @@ module.exports = function(app, env) {
 	app.get(baseurl + '/cpu', errorController.getCpu);
 	app.get(baseurl + '/cpu.json', errorController.getCpuJson);
 
+	// get business information
+	app.get(baseurl + '/business', apiController.getBusiness);
+
 	//api's
 	app.get(baseurl + '/business/hotels/:hotel_id/similar', apiController.renderTemplate);
 	app.get(baseurl + '/business/hotels/:hotel_id/similar.json', apiController.getHotelJson);
 
-	// app.get(baseurl + '/business/gym/:gym_id/similar', apiController.renderTemplate);
-	// app.get(baseurl + '/business/gym/:gym_id/similar.json', apiController.getGymJson);
+	app.get(baseurl + '/business/gym/:gym_id/similar', apiController.renderTemplate);
+	app.get(baseurl + '/business/gym/:gym_id/similar.json', apiController.getGymJson);
 
-	// app.get(baseurl + '/business/bars/:bar_id/similar', apiController.renderTemplate);
-	// app.get(baseurl + '/business/bars/:bar_id/similar.json', apiController.getBarJson);
+	app.get(baseurl + '/business/bars/:bar_id/similar', apiController.renderTemplate);
+	app.get(baseurl + '/business/bars/:bar_id/similar.json', apiController.getBarJson);
 
-	// app.get(baseurl + '/business/books/:book_id/similar', apiController.renderTemplate);
-	// app.get(baseurl + '/business/books/:book_id/similar', apiController.getBookJson);
+	app.get(baseurl + '/business/books/:book_id/similar', apiController.renderTemplate);
+	app.get(baseurl + '/business/books/:book_id/similar.json', apiController.getBookJson);
 
 }
