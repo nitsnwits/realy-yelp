@@ -25,21 +25,22 @@ module.exports.postUser = function(req, res) {
 	// check if body is empty
 	if (_.isEmpty(req.body)) {
 		logger.log("Empty request body received in POST user.");
-		return res.render('errorpage', {layout: 'layout'});
+		return res.render('Errorpage');
 	}
 	
 	logger.log("POST /user request received." + JSON.stringify(req.body));
 	userModel.dbCreateUser(req.body, function(error, newUser) {
 		if (error) {
 			logger.log('Error from database in POST user. ' + error);
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 		}
 		if (validator.isNull(newUser)) {
 			logger.log('Null object received from database in POST user. ');
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 		}
 		logger.log('POST /user response: ' + JSON.stringify(newUser));
-		return res.render('Home', {layout: 'layout'});
+		res.locals.userName = newUser.first_name;
+		return res.render('Home');
 	});
 }
 
@@ -49,11 +50,11 @@ module.exports.getUser = function(req, res) {
 	userModel.dbGetUser(userId, function(error, user) {
 		if (error) {
 			logger.log('Error from database: ' + error);
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 		}
 		if (validator.isNull(user)) {
 			logger.log('Null object received in get User controller, userId: ' + userId);
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 
 		}
 		logger.log('GET /user response ' + JSON.stringify(user));
@@ -69,19 +70,20 @@ module.exports.postLogin = function(req, res) {
 	userModel.dbLoginUser(username, password, function(error, user) {
 		if (error) {
 			logger.log('Error from database: ' + error);
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 		}
 		if (validator.isNull(user)) {
 			res.locals.errorMessage = "Sorry " + username + ". We did you find you in our database. Do you want to try again?";
 			logger.log('Null object received in get User controller, userId: ' + username);
-			return res.render('errorpage', {layout: 'layout'});
+			return res.render('Errorpage');
 		}
 		if (user.email === username && user.password === password) {
-			res.render('Home', {layout: 'layout'});
+			res.locals.userName = user.first_name;
+			res.render('Home');
 			return;
 		} else {
 			res.locals.errorMessage = "Sorry " + username + ". We did not match any credentials. Do you want to try again?";
-			res.render('errorpage', {layout: 'layout'});
+			res.render('Errorpage');
 			return;
 		}
 	});
