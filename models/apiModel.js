@@ -78,10 +78,27 @@ function dbGetBook(bookId, callback) {
  	});	
 }
 
+function dbGetBusiness(businessId, callback) {
+	env.Business.findOne({ "business_id": businessId }, function(error, business) {
+		if(error) {
+			logger.error('Error from database: ' + error);
+			return callback(error);
+		}
+		// check if a null object is received
+		if(validator.isNull(business)) {
+			logger.debug('Null object received from database, businessId: ' + businessId);
+			return callback(null, {});
+		}
+		business = business.toObject();
+		return callback(null, _.omit(business, ['_id', '__v']));
+	});
+}
+
 moduleExports = {}
 moduleExports.dbGetHotel = dbGetHotel;
 moduleExports.dbGetGym = dbGetGym;
 moduleExports.dbGetBar = dbGetBar;
 moduleExports.dbGetBook = dbGetBook;
+moduleExports.dbGetBusiness = dbGetBusiness;
 
 module.exports = moduleExports;
