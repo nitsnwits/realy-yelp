@@ -8,6 +8,7 @@ var userController = require('../../controllers/userController')
 	, errorController = require('../../controllers/errorController')
 	, baseurl = ''
 	, apiController = require('../../controllers/apiController')
+	, staticController = require('../../controllers/staticController')
 ;
 
 module.exports = function(app, env) {
@@ -41,5 +42,8 @@ module.exports = function(app, env) {
 
 	app.get(baseurl + '/business/books/:book_id/similar', apiController.renderTemplate);
 	app.get(baseurl + '/business/books/:book_id/similar.json', apiController.getBookJson);
+
+	//static to create user from yelp data set
+	app.post(baseurl + '/staticCreateUser', staticController.createUser);
 
 }
