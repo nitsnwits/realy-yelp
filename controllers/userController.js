@@ -63,7 +63,7 @@ module.exports.getUser = function(req, res) {
 }
 
 module.exports.postLogin = function(req, res) {
-	logger.log("POST /login request received userId=" + req.body.userId);
+	logger.log("POST /login request received username=" + req.body.loginname);
 	// logger.log('blah' + JSON.stringify(req.body));
 	var username = req.body.loginname;
 	var password = req.body.password;
@@ -79,6 +79,7 @@ module.exports.postLogin = function(req, res) {
 		}
 		if (user.email === username && user.password === password) {
 			res.locals.userName = user.first_name;
+			res.locals.businesses = user.businesses;
 			res.render('Home');
 			return;
 		} else {

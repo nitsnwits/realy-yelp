@@ -11,7 +11,9 @@ var env = require("../config/environment")
 ;
 
 function dbCreateUser(userObject, callback) {
-	var userId = {"userId": env.uuid()};
+	if (!userObject.userId) {
+		var userId = {"userId": env.uuid()};
+	}
 	userObject = _.extend(userObject, userId);
 
 	// Create object instance for mongoose
@@ -68,10 +70,21 @@ function dbLoginUser(username, password, callback) {
  	});
 }
 
+function removeUsers(callback) {
+	env.Users.remove({}, function(error, numRemoved) {
+		if(error) {
+			logger.error('Error from database: ' + error);
+			return callback(error);
+		}
+		return callback(null, numRemoved);
+	});
+}
+
 // Export all functions for this module
 moduleExports = {}
 moduleExports.dbGetUser = dbGetUser;
 moduleExports.dbCreateUser = dbCreateUser;
 moduleExports.dbLoginUser = dbLoginUser;
+moduleExports.removeUsers = removeUsers;
 
 module.exports = moduleExports;
