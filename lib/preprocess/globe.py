@@ -92,9 +92,9 @@ def parseDataset():
 				print "Except: " + str(dataframe)
 
 			# control limit for testing, uncomment to test code
-			if(i == 25000):
-				print 'breaking;'
-				break
+			# if(i == 25000):
+			# 	print 'breaking;'
+			# 	break
 
 def writeOutputDataFramesToCsv(outputDataFramesList):
 	"""
