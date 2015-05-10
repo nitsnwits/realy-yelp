@@ -19,7 +19,7 @@ Blog.find().where("author", username).
 function dbGetHotel(hotelId, callback) {
 //db.rest_sim.find( { $and: [ { key : "-xFO1E3OiDMmdqdjwUM_DA"}, {'val.1' :{$gt: 0.25}} ] } )
 
-	env.Hotels.find( { $and: [ { key : hotelId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, hotels) {
+	env.Hotels.find( { $and: [ { key : hotelId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(100).exec(function(error, hotels) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -36,7 +36,7 @@ function dbGetHotel(hotelId, callback) {
 }
 
 function dbGetGym(gymId, callback) {
-	env.Hotels.find( { $and: [ { key : gymId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, gyms) {
+	env.Gyms.find( { $and: [ { key : gymId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(100).exec(function(error, gyms) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -53,7 +53,7 @@ function dbGetGym(gymId, callback) {
 }
 
 function dbGetBar(barId, callback) {
-	env.Hotels.find( { $and: [ { key : barId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, bars) {
+	env.Bars.find( { $and: [ { key : barId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(100).exec(function(error, bars) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -70,7 +70,7 @@ function dbGetBar(barId, callback) {
 }
 
 function dbGetBook(bookId, callback) {
-	env.Hotels.find( { $and: [ { key : bookId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, books) {
+	env.Books.find( { $and: [ { key : bookId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(100).exec(function(error, books) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);

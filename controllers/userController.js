@@ -80,6 +80,7 @@ module.exports.postLogin = function(req, res) {
 		if (user.email === username && user.password === password) {
 			res.locals.userName = user.first_name;
 			res.locals.businesses = user.businesses;
+			res.locals.userId = user._id;
 			res.render('Home');
 			return;
 		} else {

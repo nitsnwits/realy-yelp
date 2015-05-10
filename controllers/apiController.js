@@ -8,6 +8,7 @@ var env = require("../config/environment")
 	, async = require('async')
 	, logger = env.logger
 	, apiModel = require('../models/apiModel')
+	,postFiltering = require('../recommendation/postFiltering')
 ;
 
 module.exports.renderTemplate = function(req, res) {
@@ -19,6 +20,7 @@ module.exports.getBusiness = function(req, res) {
 		return res.status(200).send([]);
 	}
 	var businesses = req.query.business_id.split(',');
+	console.log()
 	var responseArray = [];
 	function findBusiness(businessId, cb) {
 		apiModel.dbGetBusiness(businessId, function(err, business) {
@@ -40,6 +42,11 @@ module.exports.getBusiness = function(req, res) {
 	});
 }
 
+
+///
+
+////
+
 module.exports.getHotelJson = function(req, res) {
 	var hotelId = req.params.hotel_id;
 	apiModel.dbGetHotel(hotelId, function(error, hotels) {
@@ -47,7 +54,11 @@ module.exports.getHotelJson = function(req, res) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		return res.status(200).send(hotels);
+		postFiltering.generateFinalReco(hotels,function(finalResponse){
+			return res.status(200).send(finalResponse);
+			//return finalResponse;
+		});
+		//return res.status(200).send(hotels);
 	});
 }
 
