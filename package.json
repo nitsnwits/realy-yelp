@@ -19,7 +19,8 @@
 		"hogan-express": "*",
 		"byline": "*",
 		"os-utils": "*",
-		"socket.io": "*"
+		"socket.io": "*",
+		"geolib": "*"
   	},
 	"scripts": {
 		"start": "node ./server.js"
