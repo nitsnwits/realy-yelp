@@ -17,7 +17,9 @@ Blog.find().where("author", username).
 */
 
 function dbGetHotel(hotelId, callback) {
-	env.Hotels.find().where("key",hotelId).exec(function(error, hotels) {
+//db.rest_sim.find( { $and: [ { key : "-xFO1E3OiDMmdqdjwUM_DA"}, {'val.1' :{$gt: 0.25}} ] } )
+
+	env.Hotels.find( { $and: [ { key : hotelId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, hotels) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -34,7 +36,7 @@ function dbGetHotel(hotelId, callback) {
 }
 
 function dbGetGym(gymId, callback) {
-	env.Gyms.find().where("key",gymId).exec(function(error, gyms) {
+	env.Hotels.find( { $and: [ { key : gymId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, gyms) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -51,7 +53,7 @@ function dbGetGym(gymId, callback) {
 }
 
 function dbGetBar(barId, callback) {
-	env.Bars.find().where("key",barId).exec(function(error, bars) {
+	env.Hotels.find( { $and: [ { key : barId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, bars) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
@@ -68,7 +70,7 @@ function dbGetBar(barId, callback) {
 }
 
 function dbGetBook(bookId, callback) {
-	env.Books.find().where("key", bookId).exec(function(error, books) {
+	env.Hotels.find( { $and: [ { key : bookId}, {'val.1' :{$gt: 0}} ] } ).sort({ 'val.1' : -1}).limit(20).exec(function(error, books) {
 		if(error) {
 			logger.error('Error from database: ' + error);
 			return callback(error);
