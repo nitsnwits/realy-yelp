@@ -1,0 +1,95 @@
+pythonlines = lines.filter(lambda line: "Python" in line)
+
+
+errFile  = sc.textFile("/Users/nsharm002c/Downloads/errorFile.txt")
+
+
+#Launching Spark in Scala
+spark-shell
+
+
+# to remove all warning messages
+import org.apache.log4j.Logger
+import org.apache.log4j.Level
+Logger.getLogger("org").setLevel(Level.WARN)
+Logger.getLogger("akka").setLevel(Level.WARN)
+
+
+# leading the error data base
+val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+val errors = sqlContext.jsonFile("/Users/nsharm002c/Downloads/errorFile.txt")
+errors.registerTempTable("errors")
+errors.printSchema()
+
+
+import org.apache.spark.sql.hive.HiveContext
+# extracting one projection of the DB and sorting it. See sorting schema is already single level
+val myerr = sqlContext.sql("SELECT DEV.REC_ID, EVT.ETS, EVT.VALUE.TYPE, EVT.VALUE.CODE, LOC.ZIP FROM errors WHERE EVT.VALUE.TYPE = 'Shingle' ORDER BY ZIP ")
+val myerr = hc.sql("SELECT DEV.REC_ID as rec_id, EVT.ETS as ets, EVT.VALUE.TYPE as type, EVT.VALUE.CODE as code, LOC.ZIP as zip FROM errors")
+myerr.take(10)
+myerr.printSchema()
+
+
+### Python
+from pyspark.sql import HiveContext, Row
+hc = HiveContext(sc)
+errors = hc.jsonFile("/Users/nsharm002c/Downloads/errorFile.txt")
+errors.registerTempTable("errors");
+errors.printSchema();
+
+# get non-nested flattened schema
+lineFlat = hc.sql("select acnt.bill_id, acnt.partner, acnt.xbo_id, app.app_name, app.app_ver, dev.ecm_mac, dev.estb_mac, dev.physical_device_id, dev.rec_id, evt.ets, evt.name, evt.value.code, evt.value.description, evt.value.nl_tag_error_type, evt.value.nl_tag_name, evt.value.nl_tag_num, evt.value.type, host, loc.lat, loc.long, loc.market, loc.region, loc.utc_off, loc.zip, pv, ses.sdx, ses.sts, ses.uxts, ses.vidts from errors")
+lineFlat.registerTempTable("lineFlat")
+
+
+
+### Python example
+# sc is an existing SparkContext.
+from pyspark.sql import SQLContext
+sqlContext = SQLContext(sc)
+
+# A JSON dataset is pointed to by path.
+# The path can be either a single text file or a directory storing text files.
+path = "examples/src/main/resources/people.json"
+# Create a SchemaRDD from the file(s) pointed to by path
+people = sqlContext.jsonFile(path)
+
+# The inferred schema can be visualized using the printSchema() method.
+people.printSchema()
+# root
+#  |-- age: IntegerType
+#  |-- name: StringType
+
+# Register this SchemaRDD as a table.
+people.registerTempTable("people")
+
+# SQL statements can be run by using the sql methods provided by sqlContext.
+teenagers = sqlContext.sql("SELECT name FROM people WHERE age >= 13 AND age <= 19")
+
+#use a hive context to save it as a permanent table for analysys
+people.saveAsTable("peopleTable")
+
+
+
+
+## Scala
+val hc = new org.apache.spark.sql.hive.HiveContext(sc)
+val path = "examples/src/main/resources/people.json"
+val people = hc.jsonFile(path)
+people.printSchema()
+people.registerTempTable("people")
+people.saveAsTable("peopleTable")
+
+
+val hc = new org.apache.spark.sql.hive.HiveContext(sc)
+val path = "/Users/nsharm002c/Downloads/errorFile.txt"
+val errors = hc.jsonFile(path)
+errors.printSchema()
+errors.registerTempTable("errors")
+val lineFlat = hc.sql("select app.app_name as app_name, dev.rec_id as rec_id, evt.ets as ets, evt.value.type as type, evt.value.code as code, loc.lat as lat, loc.long as long, loc.zip as zip from errors")
+lineFlat.registerTempTable("lineFlat")
+lineFlat.count()
+lineFlat.saveAsTable("lineFlatAll")
+
+
+val lineFlat = hc.sql("select acnt.bill_id, acnt.partner, acnt.xbo_id, app.app_name, app.app_ver, dev.ecm_mac, dev.estb_mac, dev.physical_device_id, dev.rec_id, evt.ets, evt.name, evt.value.code, evt.value.description, evt.value.nl_tag_error_type, evt.value.nl_tag_name, evt.value.nl_tag_num, evt.value.type, host, loc.lat, loc.long, loc.market, loc.region, loc.utc_off, loc.zip, pv, ses.sdx, ses.sts, ses.uxts, ses.vidts from errors")
