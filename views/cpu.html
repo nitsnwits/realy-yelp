@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>REALY-YELP | Dashboard</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Morris chart -->
+    <link href="plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <!-- jvectormap -->
+    <link href="plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker -->
+    <link href="plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="https://github.com/nitsnwits/wewatch/blob/master/views/img/favicon.png">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Varela" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="initial-scale=1.0, width=device-width" name="viewport">
+  <title>Errors</title>
+
+  <link href="css/base.min.css" rel="stylesheet">
+  <style type="text/css">
+    .home-container{
+      margin-left: 17%;
+    }
+    .fade {
+      opacity: 0.5;
+      transition: opacity .25s ease-in-out;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
+      
+    }
+   .fade:hover {
+      opacity: 1;
+    }
+    .rest-background {
+      background-image: url("img/food1.jpg");
+      
+    }
+    .common_bg{
+      height: 200px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.5;
+      transition: opacity .25s ease-in-out;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
+    }
+  </style>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  </head>
+  <body class="skin-blue">
+    <div class="wrapper">
+      <!-- header logo: style can be found in header.less -->
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">REALY-YELP</a>
+        <!-- Header Navbar: style can be found in header.less -->
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <div class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>{{userName}}</p>
+
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..."/>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="index.html"><i class="fa fa-angle-double-right"></i> Dashboard v1</a></li>
+                <li class="active"><a href="index2.html"><i class="fa fa-angle-double-right"></i> Dashboard v2</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="pages/widgets.html">
+                <i class="fa fa-th"></i> <span>Widgets</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-bar-chart-o"></i>
+                <span>Charts</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
+                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
+                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="/errors">
+                <span>Errors Dashboard</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="/cpu">
+                <span>System Statistics</span>
+              </a>
+            </li>              
+           
+      </div>         
+         <ul class="nav nav-tabs" role="tablist">
+            <li ><a href="#">Restaurant</a></li> <!-- class="active"-->
+            <li><a href="#">Bars</a></li>
+            <li><a href="#">Gym</a></li>
+            <li><a href="#">Books</a></li>        
+         </ul>
+      </div>
+
+      <div class = "home-container">
+        <div class="content-inner">
+          <div class="container">
+            <table style="width:100%">
+              <tr>
+                <td><div id="chart_div1"></div></td>
+                <td><div id="chart_div2"></div></td> 
+                <td><div id="chart_div3"></div></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      <script src="js/jquery.js"></script>
+      <script type="text/javascript">
+            google.load("visualization", "1", {packages:["gauge"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart(stats) {
+
+              if (!stats) {
+                var data = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Memory', 80],
+                  ['Cpu Free', 55],
+                  ['Cpu Usage', 68]
+                ]);
+              }
+
+              if (stats) {
+                var dataMemory = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Free Memory', Math.round(stats.freeMem * 100)]
+                ]);
+                var dataCpuUsage = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Cpu Usage', Math.round(stats.cpuUsage * 100)]
+                ]);
+                var dataCpuFree = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Cpu Free', Math.round(stats.cpuFree * 100)] 
+                ]);
+              }
+
+              var optionsMemory = {
+                width: 800, height: 400,
+                redFrom: 0, redTo: 10,
+                yellowFrom:10, yellowTo: 30,
+                minorTicks: 5
+              };
+
+              var optionsCpuUsage = {
+                width: 800, height: 400,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 70, yellowTo: 90,
+                minorTicks: 5
+              };
+
+              var optionsCpuFree = {
+                width: 800, height: 400,
+                redFrom: 0, redTo: 10,
+                yellowFrom: 10, yellowTo: 30,
+                minorTicks: 5
+              };
+
+              var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+              var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+              //var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+              chart1.draw(dataMemory, optionsMemory);
+              chart2.draw(dataCpuUsage, optionsCpuUsage);
+              //chart3.draw(dataCpuFree, optionsCpuFree);
+            }
+        
+        setInterval(function() {
+          $.ajax({
+            url: '/cpu.json',
+            method: 'GET',
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+              drawChart(data);
+            },
+            error: function() {
+              $('#result').html('<div class="alert alert-danger" role="alert">Could not load statistics.</div>');
+            }
+          });
+        }, 3000);     
+      </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <!-- Sparkline -->
+    <script src="plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <!-- jvectormap -->
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+    <!-- daterangepicker -->
+    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -18,7 +18,6 @@ var userModel = require("../models/userModel");
 
 module.exports.getRoot = function(req, res) {
 	logger.log('GET Request for URL: / received.');
-	console.log(req.method);
 	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	res.render('../views/Landing.html');
 }
