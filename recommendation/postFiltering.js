@@ -15,7 +15,7 @@ module.exports.generateFinalReco = function(output_string,callback){
 			parseResponse(output_string,function(businesses){
 				buffer = output_string;
 				getBusinessFromIds(businesses,function(results){
-					console.log("meta info is "+results);
+					// console.log("meta info is "+results);
 					            var locationFiltered = locationFilter(results);
 					           // var timeFilterred = timefilter(locationFiltered);
 					           //console.log("came herew");
@@ -30,7 +30,6 @@ module.exports.generateFinalReco = function(output_string,callback){
 function getBusinessFromIds(business_id,callback) {
 	
 	var businesses = business_id.split(',');
-	console.log()
 	var responseArray = [];
 	function findBusinessFromId(businessId, cb) {
 		apiModel.dbGetBusiness(businessId, function(err, business) {
@@ -124,7 +123,7 @@ function getBusinessFromIds(business_id,callback) {
 
 		}
 
-		console.log("done");
+		// console.log("done");
 		return close_buisnesses;
     }
 

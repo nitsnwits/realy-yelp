@@ -19,6 +19,7 @@ module.exports.getBusiness = function(req, res) {
 	if (!req.query.business_id) {
 		return res.status(200).send([]);
 	}
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	var businesses = req.query.business_id.split(',');
 	console.log()
 	var responseArray = [];
@@ -49,6 +50,7 @@ module.exports.getBusiness = function(req, res) {
 
 module.exports.getHotelJson = function(req, res) {
 	var hotelId = req.params.hotel_id;
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetHotel(hotelId, function(error, hotels) {
 		if (error) {
 			logger.log('Error from database: ' + error);
@@ -65,6 +67,7 @@ module.exports.getHotelJson = function(req, res) {
 
 module.exports.getGymJson = function(req, res) {
 	var gymId = req.params.gym_id;
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetGym(gymId, function(error, gyms) {
 		if (error) {
 			logger.log('Error from database: ' + error);
@@ -81,6 +84,7 @@ module.exports.getGymJson = function(req, res) {
 
 module.exports.getBarJson = function(req, res) {
 	var barId = req.params.bar_id;
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetBar(barId, function(error, bars) {
 		if (error) {
 			logger.log('Error from database: ' + error);
@@ -97,6 +101,7 @@ module.exports.getBarJson = function(req, res) {
 
 module.exports.getBookJson = function(req, res) {
 	var bookId = req.params.book_id;
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetBook(bookId, function(error, books) {
 		if (error) {
 			logger.log('Error from database: ' + error);

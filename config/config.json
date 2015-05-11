@@ -2,7 +2,8 @@
     "server": {
       "debug": true,
       "appName": "realy-yelp",
-      "validateSchemas": true
+      "validateSchemas": true,
+      "logfile": "realy-yelp.log"
     },
     "mongo": {
       "url": "mongodb://localhost/yelp"
