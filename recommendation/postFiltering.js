@@ -12,7 +12,7 @@ module.exports.generateFinalReco = function(output_string,callback){
 			//console.log("output_string" + output_string);
 			parseResponse(output_string,function(businesses){
 				getBusinessFromIds(businesses,function(results){
-					console.log("meta info is "+results);
+					// console.log("meta info is "+results);
 					            var locationFiltered = locationFilter(results);
 					           // var timeFilterred = timefilter(locationFiltered);
 					           //console.log("came herew");
@@ -27,7 +27,6 @@ module.exports.generateFinalReco = function(output_string,callback){
 function getBusinessFromIds(business_id,callback) {
 	
 	var businesses = business_id.split(',');
-	console.log()
 	var responseArray = [];
 	function findBusinessFromId(businessId, cb) {
 		apiModel.dbGetBusiness(businessId, function(err, business) {
@@ -118,7 +117,7 @@ function getBusinessFromIds(business_id,callback) {
 			//var distance = Math.sqrt(Math.pow((longitude - longi), 2) + Math.pow((latitude - lat), 2));
 			var distance = dist(latitude,longitude,lat,longi);
 			distance = distance/100000;
-			console.log(distance);
+			// console.log(distance);
 			//console.log(distance);
 			if(distance < 164.3){ // condition yet to write
 				close_buisnesses.push(similar_items[attributename]["0"]);
@@ -127,7 +126,7 @@ function getBusinessFromIds(business_id,callback) {
 
 		}
 
-		console.log("done");
+		// console.log("done");
 		return close_buisnesses;
     }
 
