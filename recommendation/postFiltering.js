@@ -7,10 +7,13 @@ var env = require("../config/environment")
 	, apiModel = require('../models/apiModel')
 	, geolib = require('geolib');
 
+	var buffer=null;
+
 module.exports.generateFinalReco = function(output_string,callback){
 
-			//console.log("output_string" + output_string);
+			console.log("output_string" + output_string);
 			parseResponse(output_string,function(businesses){
+				buffer = output_string;
 				getBusinessFromIds(businesses,function(results){
 					console.log("meta info is "+results);
 					            var locationFiltered = locationFilter(results);
@@ -49,30 +52,10 @@ function getBusinessFromIds(business_id,callback) {
 	});
 }
 
-	function fetchMetaData(businesses){
-
-		var ajax_url = "/business?business_id="+businesses;   
-		//console.log(ajax_url);
-		$.ajax({
-              type: "GET",
-              url:ajax_url,
-
-              contentType: 'application/json',           
-              success: function(results) 
-              {    
-              	console.log("meta info is "+results);
-	            return results;
-              },
-              error: function (error) {
-                  console.log('Error');
-              }
-          });
-	}
+	
 
 	function parseResponse(data,callback){
-		//console.log("data:----------"+ JSON.stringify(data));
-		//console.log("length----------"+data.length);
-		//console.log(data["0"].val[0]);
+		
 		var businesses="";
 
 		
@@ -108,7 +91,7 @@ function getBusinessFromIds(business_id,callback) {
 		//console.log(similar_items);
 		var longi = 37.3353;
 		var lat = 121.8813; 
-
+		var responseCount = 0;
 		for(var attributename in similar_items){
    			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
    			// console.log(Object.keys(similar_items[attributename]["0"]['_doc']));
@@ -119,10 +102,24 @@ function getBusinessFromIds(business_id,callback) {
 			var distance = dist(latitude,longitude,lat,longi);
 			distance = distance/100000;
 			console.log(distance);
-			//console.log(distance);
-			if(distance < 164.3){ // condition yet to write
+
+			/*for(var i = 0; i < )*/
+
+
+			//console.log(buffer);
+			if(distance < 164.5){ // condition yet to write
+				for(var i = 0 ; i < 50 ; i++)
+				{
+				    if (buffer[i]['_doc']['val'][0] == similar_items[attributename]["0"]['_doc'].business_id ) {
+				    	similar_items[attributename]["0"]['_doc'].similarity = buffer[i]['_doc']['val'][1];
+				    	similar_items[attributename]["0"]['_doc'].commonsupport = buffer[i]['_doc']['val'][2];
+				        /*results.push(obj.list[i]);*/
+				    }
+				}
 				close_buisnesses.push(similar_items[attributename]["0"]);
-				
+				responseCount++;
+				if(responseCount>=6)
+					break;
 			}
 
 		}

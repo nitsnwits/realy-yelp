@@ -55,6 +55,7 @@ module.exports.getHotelJson = function(req, res) {
 			return res.render('Errorpage', {error: error});
 		}
 		postFiltering.generateFinalReco(hotels,function(finalResponse){
+
 			return res.status(200).send(finalResponse);
 			//return finalResponse;
 		});
@@ -69,7 +70,12 @@ module.exports.getGymJson = function(req, res) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		return res.status(200).send(gyms);
+		postFiltering.generateFinalReco(gyms,function(finalResponse){
+
+			return res.status(200).send(finalResponse);
+			//return finalResponse;
+		});
+		//return res.status(200).send(gyms);
 	});
 }
 
@@ -80,7 +86,12 @@ module.exports.getBarJson = function(req, res) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		return res.status(200).send(bars);
+		postFiltering.generateFinalReco(bars,function(finalResponse){
+
+			return res.status(200).send(finalResponse);
+			//return finalResponse;
+		});
+		//return res.status(200).send(bars);
 	});	
 }
 
@@ -91,6 +102,11 @@ module.exports.getBookJson = function(req, res) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		return res.status(200).send(books);
+		postFiltering.generateFinalReco(books,function(finalResponse){
+
+			return res.status(200).send(finalResponse);
+			//return finalResponse;
+		});
+		//return res.status(200).send(books);
 	});	
 }

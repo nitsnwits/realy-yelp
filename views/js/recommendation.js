@@ -3,15 +3,36 @@ $(document).ready(function()
 	'use strict'
 	
 	 
-	fetchRecommendation(1);
+	fetchRecommendation("rest");
+
+	$('#rest').click(function() {
+        fetchRecommendation("rest");
+    });
+
+    $('#bar').click(function() {
+        fetchRecommendation("bar");
+    });
+    $('#gym').click(function() {
+        fetchRecommendation("gym");
+    });
+    $('#books').click(function() {
+        fetchRecommendation("books");
+    });
 
 	function fetchRecommendation(businessType){
 
 		
-		alert($("#hidden").val())
-		
-        var businessId = $("#hidden").val();	         
-        var ajax_url = "/business/hotels/-xFO1E3OiDMmdqdjwUM_DA/similar.json";      
+		//alert($("#hidden").val())
+		var ajax_url = "";
+        var businessId = $("#hidden").val();
+        if(businessType=="rest")	         
+        	ajax_url = "/business/hotels/-xFO1E3OiDMmdqdjwUM_DA/similar.json";
+        else if(businessType=="gym")
+        	ajax_url = "/business/gym/-25FveJPYkjFxVJhu75F3w/similar.json";
+        else if(businessType=="books")
+        	ajax_url = "/business/books/-FTT107VGsLs6MzvK1GY2Q/similar.json";
+        else
+        	ajax_url = "/business/bars/-yxfBYGB6SEqszmxJxd97A/similar.json";
                       
           $.ajax({
               type: "GET",
@@ -20,8 +41,10 @@ $(document).ready(function()
                      
               success: function(output_string) 
               {   
-              	alert("Yipiiiiiii got it: " + output_string)
-              	return output_string;
+              	//alert("Yipiiiiiii got it: " + output_string)
+              	//ssreturn output_string;
+              	populate(businessType,output_string);
+              	//return output_string;
               	
               },
               	/*var businessMeta = fetchMetaData(businesses);
@@ -36,74 +59,39 @@ $(document).ready(function()
           });
 	}
 
-	function fetchMetaData(businesses){
+	function populate(businessType,output_string){
+		console.log(JSON.stringify(output_string));
+		var imgclass ="";
+		if(businessType=="rest")	         
+        	imgclass = "rest-background common_bg";
+        else if(businessType=="gym")
+        	imgclass = "gym-background common_bg";
+        else if(businessType=="books")
+        	imgclass = "books-background common_bg";
+        else
+        	imgclass = "bar-background common_bg";
 
-		var ajax_url = "/business?business_id="+businesses;   
-		//console.log(ajax_url);
-		$.ajax({
-              type: "GET",
-              url:ajax_url,
+		for(var i=0;i<6;i++){
+			var frontdiv = '#f-reco'+i;
+			console.log(frontdiv);
+			var backdiv = '#b-reco'+i;
+			var frontText = "<table class='recotable'><tr><td>"+ output_string[i]['name'] +"</td></tr><tr><td>"+ output_string[i]['full_address']+"</td></tr><tr><td> Stars: "+ output_string[i]['stars'] +"</td></tr></table>";
+			var backtext = "<table class='recotable'><tr><td> Common Support: "+  output_string[i]['commonsupport'] +"</tr><tr><td> Similarity: "+  output_string[i]['similarity'] +"</td></tr></table>";
+			console.log(imgclass);
+			$(frontdiv).empty();
+			$(frontdiv).removeClass();
+			$(frontdiv).addClass(imgclass);
+			$(frontdiv).html(frontText);
+			$(backdiv).empty();
+			$(backdiv).removeClass();
+			$(backdiv).addClass(imgclass);
+			$(backdiv).html(backtext);
+		}
+		//console.log(output_string[0]['address'])
+		//alert(Object.keys(output_string));
 
-              contentType: 'application/json',           
-              success: function(results) 
-              {    
-              	console.log("meta info is "+results);
-	            return results;
-              },
-              error: function (error) {
-                  alert('Error');
-              }
-          });
 	}
-
-	function parseResponse(data,callback){
-		
-		//console.log(data["0"].val[0]);
-		var businesses=""
-
-		for(var i = 0 ; i < 50 ; i++){
-			businesses+=data[i].val[0]+",";
-		}
-
-		/*for(var elemetns in data){
-			for(var row in elemetns){
-				businesses+=row[row].val[0]+",";	
-			}
-			
-		}*/
-		businesses = businesses.substring(0,businesses.length-1);
-	    //console.log(businesses)
-		callback(businesses); 
- 	}
-
- 	function locationFilter(similar_items){
-		var distance_th; //initialize to some value
-		var close_buisnesses = [];
-		//similar_items =  JSON.parse(similar_items);
-		console.log(similar_items);
-		var longi = 37.3353;
-		var lat = 121.8813; 
-
-		for(var attributename in similar_items){
-   			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
-   			var longitude = similar_items[attributename]["0"].longitude;
-			var latitude = similar_items[attributename]["0"].latitude;
-			alert(longitude + "     " + latitude);
-			//var distance = Math.sqrt(Math.pow((longitude - longi), 2) + Math.pow((latitude - lat), 2));
-			var distance = dist(latitude,longitude,lat,longi);
-			alert(distance);
-			console.log(distance);
-			if(distance < 180){ // condition yet to write
-				close_buisnesses.push(similar_items[attributename]["0"]);
-				
-			}
-
-		}
-
-		
-		return close_buisnesses;
-    }
-
+	
     function timefilter(similar_items){
     	var d = new Date();
 	    var day = new d.getDay();
