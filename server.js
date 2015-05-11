@@ -38,7 +38,15 @@ require('./config/init/compileSchemas')(app, sharedEnv);
 
 // logger has, logger.log, logger.debug, logger.error
 // debug Level boolean from shareEnv.config.debug
+sharedEnv.hostname = require('os').hostname();
 server = http.createServer(app);
+var io = require('socket.io').listen(server);
+sharedEnv.io = io;
+
+io.on('connection', function(socket) {
+	// console.log('emitted');
+	// socket.emit('request', 'blah');
+});
 
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8000
     , ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";

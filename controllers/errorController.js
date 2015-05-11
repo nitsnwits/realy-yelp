@@ -15,7 +15,7 @@ module.exports.getErrorsJson = function(req, res, next) {
   var stream = byline(fs.createReadStream(env.config.server.logfile, { encoding: 'utf8' }));
   var errorList = [];
   stream.on('data', function(line) {
-    errorList.push(line + '-' + env.hostname);
+    errorList.push(line);
   });
   stream.on('end', function() {
     res.send(errorList.reverse());

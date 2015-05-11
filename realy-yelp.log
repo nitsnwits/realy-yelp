@@ -1,0 +1,25 @@
+23 Apr 13:49:43 - Successfully loaded objectSchemas.
+23 Apr 13:49:43 - CMPE 280 Server listening on port 8000
+23 Apr 13:55:05 - POST /login request received userId=undefined
+23 Apr 13:55:17 - POST /login request received userId=undefined
+23 Apr 13:57:08 - Successfully loaded objectSchemas.
+23 Apr 13:57:08 - CMPE 280 Server listening on port 8000
+23 Apr 13:57:49 - POST /login request received userId=undefined
+23 Apr 14:10:14 - POST /login request received userId=undefined
+23 Apr 14:12:47 - POST /login request received userId=undefined
+23 Apr 14:13:56 - POST /login request received userId=undefined
+23 Apr 14:15:17 - POST /login request received userId=undefined
+23 Apr 15:02:18 - Successfully loaded objectSchemas.
+23 Apr 15:02:18 - CMPE 280 Server listening on port 8000
+23 Apr 15:02:32 - Successfully loaded objectSchemas.
+23 Apr 15:02:32 - CMPE 280 Server listening on port 8000
+23 Apr 15:02:59 - POST /login request received userId=undefined
+23 Apr 17:13:35 - Successfully loaded objectSchemas.
+23 Apr 17:13:35 - CMPE 280 Server listening on port 8000
+23 Apr 17:15:25 - POST /login request received userId=undefined
+23 Apr 17:45:30 - POST /login request received userId=undefined
+23 Apr 18:48:44 - POST /login request received userId=undefined
+23 Apr 18:48:54 - POST /login request received userId=undefined
+23 Apr 18:48:54 - Null object received from database, userId: test@gmail.com
+23 Apr 18:51:02 - Successfully loaded objectSchemas.
+23 Apr 18:51:02 - CMPE 280 Server listening on port 8000

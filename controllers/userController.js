@@ -18,6 +18,8 @@ var userModel = require("../models/userModel");
 
 module.exports.getRoot = function(req, res) {
 	logger.log('GET Request for URL: / received.');
+	console.log(req.method);
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	res.render('../views/Landing.html');
 }
 
@@ -29,6 +31,7 @@ module.exports.postUser = function(req, res) {
 	}
 	
 	logger.log("POST /user request received." + JSON.stringify(req.body));
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	userModel.dbCreateUser(req.body, function(error, newUser) {
 		if (error) {
 			logger.log('Error from database in POST user. ' + error);
@@ -46,6 +49,7 @@ module.exports.postUser = function(req, res) {
 
 module.exports.getUser = function(req, res) {
 	logger.log("GET /user request received userId=" + req.params.user_id);
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	var userId = req.params.user_id;
 	userModel.dbGetUser(userId, function(error, user) {
 		if (error) {
@@ -64,6 +68,7 @@ module.exports.getUser = function(req, res) {
 
 module.exports.postLogin = function(req, res) {
 	logger.log("POST /login request received username=" + req.body.loginname);
+	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	// logger.log('blah' + JSON.stringify(req.body));
 	var username = req.body.loginname;
 	var password = req.body.password;
