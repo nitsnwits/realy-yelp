@@ -32,10 +32,45 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    .video-section .pattern-overlay {
+background-color: rgba(71, 71, 71, 0.59);
+padding: 110px 0 32px;
+min-height: 496px; 
+/* Incase of overlay problems just increase the min-height*/
+}
+.video-section h1, .video-section h3{
+text-align:center;
+color:#fff;
+}
+.video-section h1{
+font-size:110px;
+font-family: 'Buenard', serif;
+font-weight:bold;
+text-transform: uppercase;
+margin: 40px auto 0px;
+text-shadow: 1px 1px 1px #000;
+-webkit-text-shadow: 1px 1px 1px #000;
+-moz-text-shadow: 1px 1px 1px #000;
+}
+.video-section h3{
+font-size: 25px;
+font-weight:lighter;
+margin: 0px auto 15px;
+}
+.video-section .buttonBar{display:none;}
+.player {font-size: 1px;}
+
+</style>
+<link href='http://fonts.googleapis.com/css?family=Buenard:700' rel='stylesheet' type='text/css'>
+<script src="js/jquery.js"></script>
+<script src="http://pupunzi.com/mb.components/mb.YTPlayer/demo/inc/jquery.mb.YTPlayer.js"></script>
+
 
 </head>
 
 <body id="page-top">
+
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -67,7 +102,7 @@
                     </li>
                     <li>
                          <!-- <a class="page-scroll" href="#loginModal">Login/SignUp</a> -->
-                         <li><a data-toggle="modal" href="#loginModal"><u><b>Log In / Sign Up</b></u></a></li>   
+                         <li><a data-toggle="modal" href="#loginModal"><u><b>Lets take a tour!!</b></u></a></li>   
                     </li>     
                 </ul>
             </div>
@@ -75,18 +110,29 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-    <header>
-        <div class="header-content">
+<!--     <header>
+        <div class="header-content">         
             <div class="header-content-inner">
-<br><br>
+                <br><br>
                 <h2><b>Your favorite application for searching restaurants around.</b></h2>
                 <hr>
                 <p>We know what you need, every time, every moment.</p>
                 <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
             </div>
-        </div>
-    </header>
+        </div>         
+    </header> -->
+
+            <section class="content-section video-section">
+          <div class="pattern-overlay">
+          <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=C4fbOGxiFDc',containment:'.video-section', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+               </div>
+              </div>
+            </div>
+          </div>
+        </section>    
 
     <section class="bg-primary" id="about">
         <div class="container">
@@ -153,7 +199,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -168,7 +214,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -183,7 +229,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -198,7 +244,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -213,7 +259,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -228,7 +274,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    real-yelp
+                                    realy-yelp
                                 </div>
                                 <div class="project-name">
                                     We feed your hunger!
@@ -245,7 +291,7 @@
         <div class="container text-center">
             <div class="call-to-action">
                 <h2>No downloads required</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Use Realy-Yelp(coming soon)!</a>
+                <a href="#" class="btn btn-default btn-xl wow tada">Use Realy-Yelp!</a>
             </div>
         </div>
     </aside>
@@ -287,8 +333,10 @@
                     <form role="form" action="/login" method="POST">
                       <fieldset>
                         <div class="row">
-                          <div class="center-block">
-                          </div>
+                        <!--  <div class="center-block">
+                                  <img class="profile-img"
+                                          src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                          </div> -->
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-10  col-md-offset-1 ">
@@ -321,11 +369,11 @@
                   </div>
               </div>
               
-              <!-- <div class="modal-footer">
+            <!--  <div class="modal-footer">
                 <div class="col-md-1accordion2">
                   <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 </div>  
-              </div> -->
+              </div>-->
               
             </div>
           </div>
@@ -383,11 +431,17 @@
     </div>
     
    <!--=========== END MODAL REGISTRATION ================-->
+<script>
+   $(document).ready(function () {
 
+    $(".player").mb_YTPlayer();
+
+});
+</script>
 
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
