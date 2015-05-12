@@ -44,6 +44,9 @@ $(document).ready(function()
               	//alert("Yipiiiiiii got it: " + output_string)
               	//ssreturn output_string;
               	populate(businessType,output_string);
+                d3piechart(output_string,'similarity','chart');
+                d3piechart(output_string,'commonsupport','chart2');
+
               	//return output_string;
               	
               },
@@ -103,11 +106,49 @@ $(document).ready(function()
 			var close = similar_items[attributename]["0"].day.close;
 			alert(open + "     " + close);
 			
-			if(true){ // condition yet to write
+			 if(hour>open & hour<close){ // condition yet to write
 				openBusiness.push(similar_items[attributename]["0"]);
 				
-			}
-		}
+			 }
+		  }
+    }
+
+
+
+    function d3piechart(data,content,divid){           
+             $(".featurette-head").text('Data Analysis');
+             $(".well").text('');
+             
+             var names = [];
+             var similarity = [];
+             for(var i=0;i<6;i++){
+              names[i]=data[i]['name'];
+              similarity[i]=data[i][content];
+             }
+                $("#"+divid).empty();    
+             var pie = new d3pie(divid, {
+              header: {
+          title: { 
+          }
+        },
+          size: {
+          canvasHeight: 600,
+          canvasWidth: 700
+        },
+        data: {
+          content: [
+
+            
+            { label: names[0], value: similarity[0], color: '#e6211a'},
+            { label:  names[1], value:similarity[1], color: '#a7211d'},
+            { label:  names[2], value: similarity[2],color :'#e69595'},
+                  { label:  names[3], value: similarity[3],color : '#eb4d48'},
+                  { label:  names[4], value: similarity[4], color : '#d43f3a'},
+                  { label:  names[5], value: similarity[5], color : '#690400'},
+          ]
+        }
+      });
+    
     }
 
 });

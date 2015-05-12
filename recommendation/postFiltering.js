@@ -138,8 +138,9 @@ function getBusinessFromIds(business_id,callback) {
 			var close = similar_items[attributename]["0"].day.close;
 			console.log(open + "     " + close);
 			
-			if(true){ // condition yet to write
+			if(hour>open & hour<close){ // condition yet to write
 				openBusiness.push(similar_items[attributename]["0"]);
+				console.log("OPEN");
 				
 			}
 		}

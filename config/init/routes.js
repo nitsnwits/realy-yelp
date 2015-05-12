@@ -28,6 +28,9 @@ module.exports = function(app, env) {
 	app.get(baseurl + '/cpu', errorController.getCpu);
 	app.get(baseurl + '/cpu.json', errorController.getCpuJson);
 
+	// viz
+	app.get(baseurl + '/tableau', apiController.getTableau);
+
 	// get business information
 	app.get(baseurl + '/business', apiController.getBusiness);
 
