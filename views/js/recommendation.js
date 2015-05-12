@@ -43,10 +43,16 @@ $(document).ready(function()
               {   
               	//alert("Yipiiiiiii got it: " + output_string)
               	//ssreturn output_string;
-              	populate(businessType,output_string);
-                d3piechart(output_string,'similarity','chart');
-                d3piechart(output_string,'commonsupport','chart2');
+                if(output_string.length == 0){
+                  //alert("no rest");
+                  noResult(businessType);
+                }else{
 
+
+                	populate(businessType,output_string);
+                  d3piechart(output_string,'similarity','chart');
+                  d3piechart(output_string,'commonsupport','chart2');
+                }
               	//return output_string;
               	
               },
@@ -57,10 +63,28 @@ $(document).ready(function()
                 
               
               error: function (error) {
-                  alert('Error');
+                  //alert('Error');
+                  noResult(businessType);
               }
           });
 	}
+
+  function noResult(businessType){
+    var frontdiv = '#f-reco0';
+    var backdiv = '#b-reco0';
+    var frontText = "";
+    if(businessType=="rest")
+      frontText = "<table class='recotable'><tr><td>Sorry We couldn't find open restaurant(s) at this time.</td></tr></table>";
+    else
+      frontText = "<table class='recotable'><tr><td>Sorry We couldn't find open bar(s) at this time.</td></tr></table>";
+
+    $(frontdiv).empty();
+    $(frontdiv).removeClass();
+    $(backdiv).empty();
+    $(backdiv).removeClass();
+    $(backdiv).html(frontText);
+    $(frontdiv).html(frontText); 
+  }
 
 	function populate(businessType,output_string){
 		console.log(JSON.stringify(output_string));
@@ -74,11 +98,26 @@ $(document).ready(function()
         else
         	imgclass = "bar-background common_bg";
 
+
+    var d = new Date();
+      
+      var hour = d.getHours();
+      var weekday = new Array(7);
+      weekday[0]=  "Sunday";
+      weekday[1] = "Monday";
+      weekday[2] = "Tuesday";
+      weekday[3] = "Wednesday";
+      weekday[4] = "Thursday";
+      weekday[5] = "Friday";
+      weekday[6] = "Saturday";
+      var day = weekday[d.getDay()];
+
 		for(var i=0;i<6;i++){
 			var frontdiv = '#f-reco'+i;
 			console.log(frontdiv);
 			var backdiv = '#b-reco'+i;
-			var frontText = "<table class='recotable'><tr><td>"+ output_string[i]['name'] +"</td></tr><tr><td>"+ output_string[i]['full_address']+"</td></tr><tr><td> Stars: "+ output_string[i]['stars'] +"</td></tr></table>";
+			var frontText = "<table class='recotable'><tr><td>"+ output_string[i]['name'] +"</td></tr><tr><td>"+ output_string[i]['full_address']+"</td></tr><tr><td> Stars: "+ output_string[i]['stars'] +"</td></tr>";
+      frontText+= " <tr><td>Opens at: "+ output_string[i]['hours'][day].open +"</td></tr><tr><td>Closes at: "+ output_string[i]['hours'][day].close +"</td></tr></table>";
 			var backtext = "<table class='recotable'><tr><td> Common Support: "+  output_string[i]['commonsupport'] +"</tr><tr><td> Similarity: "+  output_string[i]['similarity'] +"</td></tr></table>";
 			console.log(imgclass);
 			$(frontdiv).empty();

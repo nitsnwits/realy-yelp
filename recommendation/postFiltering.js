@@ -16,11 +16,15 @@ module.exports.generateFinalReco = function(output_string,callback){
 				buffer = output_string;
 				getBusinessFromIds(businesses,function(results){
 					// console.log("meta info is "+results);
-					            var locationFiltered = locationFilter(results);
+								postfilter(results,function(postfiltered){
+									console.log("postfiltered");
+									callback(postfiltered);
+								})
+					            //var locationFiltered = locationFilter(results);
 					           // var timeFilterred = timefilter(locationFiltered);
 					           //console.log("came herew");
 					           //console.log(locationFiltered);
-					            callback(locationFiltered);
+					            
 					           // return timeFilterred;
 				})
 	         });
@@ -83,14 +87,22 @@ function getBusinessFromIds(business_id,callback) {
 		callback(businesses); 
  	}
 
- 	function locationFilter(similar_items){
+ 	function postfilter(prefilteredData,callback){
+ 		var postFilteredData = locationFilter(prefilteredData,function(locationFiltered){
+ 			timefilter(locationFiltered,function(timeFilterred){
+ 				callback(timeFilterred);
+ 			});
+ 		});
+ 	}
+
+ 	function locationFilter(similar_items,callback){
 		var distance_th; //initialize to some value
 		var close_buisnesses = [];
 		//similar_items =  JSON.parse(similar_items);
 		//console.log(similar_items);
 		var longi = 37.3353;
 		var lat = 121.8813; 
-		var responseCount = 0;
+		
 		for(var attributename in similar_items){
    			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
    			// console.log(Object.keys(similar_items[attributename]["0"]['_doc']));
@@ -100,50 +112,77 @@ function getBusinessFromIds(business_id,callback) {
 			//var distance = Math.sqrt(Math.pow((longitude - longi), 2) + Math.pow((latitude - lat), 2));
 			var distance = dist(latitude,longitude,lat,longi);
 			distance = distance/100000;
-			console.log(distance);
+			//console.log(distance);
 
 			/*for(var i = 0; i < )*/
 
 
 			//console.log(buffer);
 			if(distance < 164.5){ // condition yet to write
+				
+				close_buisnesses.push(similar_items[attributename]["0"]);
+				
+			}
+
+		}
+
+		console.log("done locationFiltered");
+
+		callback(close_buisnesses);
+    }
+
+    function timefilter(similar_items,callback){
+    	var d = new Date();
+	    
+	    var hour = d.getHours();
+	    var weekday = new Array(7);
+		weekday[0]=  "Sunday";
+		weekday[1] = "Monday";
+		weekday[2] = "Tuesday";
+		weekday[3] = "Wednesday";
+		weekday[4] = "Thursday";
+		weekday[5] = "Friday";
+		weekday[6] = "Saturday";
+
+		var day = weekday[d.getDay()];
+
+	    var openBusiness = [];
+	    var responseCount = 0;
+	  //  console.log(JSON.stringify(similar_items));
+	   // console.log(Object.keys(similar_items));
+	    for(var attributename in similar_items){
+   			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
+   			 //console.log(Object.keys(similar_items[attributename]));
+   			 ///console.log(day);
+   			 //console.log(JSON.stringify(similar_items[attributename]['_doc'].hours));
+   			 if(typeof similar_items[attributename]['_doc'].hours[day] == 'undefined' || similar_items[attributename]['_doc'].hours[day] == null){
+   			 	console.log("undefined");
+   			 	continue;
+   			 }
+   			 	
+   			var open = similar_items[attributename]['_doc'].hours[day].open;
+			var close = similar_items[attributename]['_doc'].hours[day].close;
+		//	console.log(open + "     " + close);
+			
+			//REmove this 'if' for getting result when fetching wo working hours
+			if(hour>open && hour<close){ // condition yet to write
 				for(var i = 0 ; i < 50 ; i++)
 				{
-				    if (buffer[i]['_doc']['val'][0] == similar_items[attributename]["0"]['_doc'].business_id ) {
-				    	similar_items[attributename]["0"]['_doc'].similarity = buffer[i]['_doc']['val'][1];
-				    	similar_items[attributename]["0"]['_doc'].commonsupport = buffer[i]['_doc']['val'][2];
+				    if (buffer[i]['_doc']['val'][0] == similar_items[attributename]['_doc'].business_id ) {
+				    	similar_items[attributename]['_doc'].similarity = buffer[i]['_doc']['val'][1];
+				    	similar_items[attributename]['_doc'].commonsupport = buffer[i]['_doc']['val'][2];
 				        /*results.push(obj.list[i]);*/
 				    }
 				}
-				close_buisnesses.push(similar_items[attributename]["0"]);
+				openBusiness.push(similar_items[attributename]);
 				responseCount++;
 				if(responseCount>=6)
 					break;
-			}
-
-		}
-
-		// console.log("done");
-		return close_buisnesses;
-    }
-
-    function timefilter(similar_items){
-    	var d = new Date();
-	    var day = new d.getDay();
-	    var hour = d.getHours();
-	    var openBusiness = [];
-	    for(var attributename in similar_items){
-   			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
-   			var open = similar_items[attributename]["0"].day.open;
-			var close = similar_items[attributename]["0"].day.close;
-			console.log(open + "     " + close);
-			
-			if(hour>open & hour<close){ // condition yet to write
-				openBusiness.push(similar_items[attributename]["0"]);
-				console.log("OPEN");
 				
 			}
 		}
+		//console.log("came here");
+		callback(openBusiness);
     }
 
     function dist(Lat1,Long1,Lat2,Long2){
