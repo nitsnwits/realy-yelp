@@ -15,6 +15,10 @@ module.exports.renderTemplate = function(req, res) {
 	res.render('../views/List.html');
 }
 
+module.exports.getTableau = function(req, res) {
+	res.render('../views/tableau.html');
+}
+
 module.exports.getBusiness = function(req, res) {
 	if (!req.query.business_id) {
 		return res.status(200).send([]);
