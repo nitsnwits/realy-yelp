@@ -8,12 +8,15 @@ var env = require("../config/environment")
 	, geolib = require('geolib');
 
 	var buffer=null;
+	var locationData = null;
 
-module.exports.generateFinalReco = function(output_string,callback){
+module.exports.generateFinalReco = function(output_string,location,callback){
 
 			console.log("output_string" + output_string);
+			console.log("location----" + JSON.stringify(location));
 			parseResponse(output_string,function(businesses){
 				buffer = output_string;
+				locationData = location;
 				getBusinessFromIds(businesses,function(results){
 					// console.log("meta info is "+results);
 								postfilter(results,function(postfiltered){
@@ -103,8 +106,11 @@ function getBusinessFromIds(business_id,callback) {
 		//console.log(similar_items);
 		//lat:36.092
  //long: 115.1758
-		var longi = 111.1758;
-		var lat = 33.092; 
+		var longi = locationData['longi']; //111.1758;
+		var lat =  locationData['lat']; //33.092; 
+
+		console.log("lat------" + lat);
+		console.log("longi------" + longi);
 		
 		for(var attributename in similar_items){
    			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);

@@ -28,22 +28,32 @@ $(document).ready(function()
 
 		//alert($("#hidden").val())
    // console.log(userName);
+
 		var ajax_url = "";
-        var businessId = $("#hidden").val();
+        var hotelId = $("#hiddenhotel").val();
+        var barId = $("#hiddenbar").val();
+        var lat = $("#hiddenlat").val();
+        var longi = $("#hiddenlongi").val();
+
+        console.log("Client lat" + lat);
+        console.log("Client longi" + longi);
+
+        var data = {};
+        data.lat = lat;
+        data.longi = longi;
+       // alert(businessId);
         if(businessType=="rest")	         
-        	ajax_url = "/business/hotels/-xFO1E3OiDMmdqdjwUM_DA/similar.json";
-        else if(businessType=="gym")
-        	ajax_url = "/business/gym/-25FveJPYkjFxVJhu75F3w/similar.json";
-        else if(businessType=="books")
-        	ajax_url = "/business/books/-FTT107VGsLs6MzvK1GY2Q/similar.json";
+        	ajax_url = "/business/hotels/"+ hotelId +"/similar.json?lat="+ lat +"&longi="+ longi +"";
         else
-        	ajax_url = "/business/bars/-yxfBYGB6SEqszmxJxd97A/similar.json";
+        	ajax_url = "/business/bars/"+ barId +"/similar.json?lat="+ lat +"&longi="+ longi +"";
                       
           $.ajax({
               type: "GET",
               url:ajax_url,
+             // data : JSON.stringify(data),
               contentType: 'application/json',
-                     
+              
+
               success: function(output_string) 
               {   
               	//alert("Yipiiiiiii got it: " + output_string)
@@ -121,7 +131,7 @@ $(document).ready(function()
 			var backdiv = '#b-reco'+i;
 			var frontText = "<table class='recotable'><tr><td>"+ output_string[i]['name'] +"</td></tr><tr><td>"+ output_string[i]['full_address']+"</td></tr><tr><td> Stars: "+ output_string[i]['stars'] +"</td></tr>";
       frontText+= " <tr><td>Opens at: "+ output_string[i]['hours'][day].open +"</td></tr><tr><td>Closes at: "+ output_string[i]['hours'][day].close +"</td></tr></table>";
-			var backtext = "<table class='recotable'><tr><td> Common Support: "+  output_string[i]['commonsupport'] +"</tr><tr><td> Similarity: "+  output_string[i]['similarity'] +"</td></tr></table>";
+			var backtext = "<table class='recotable' style='height: 50%;' ><tr><td> Common Support: "+  output_string[i]['commonsupport'] +"</tr><tr><td> Similarity: "+  output_string[i]['similarity'] +"</td></tr></table>";
 			console.log(imgclass);
 			$(frontdiv).empty();
 			$(frontdiv).removeClass();

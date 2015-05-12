@@ -88,6 +88,10 @@ module.exports.postLogin = function(req, res) {
 		if (user.email === username && user.password === password) {
 			res.locals.userName = user.first_name;
 			res.locals.businesses = user.businesses;
+			res.locals.hotel = user.hotel;
+			res.locals.bar = user.bar;
+			res.locals.longi = user.longi;
+			res.locals.lat = user.lat;
 			res.locals.userId = user._id;
 			res.render('Home');
 			return;

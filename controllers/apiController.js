@@ -9,6 +9,7 @@ var env = require("../config/environment")
 	, logger = env.logger
 	, apiModel = require('../models/apiModel')
 	,postFiltering = require('../recommendation/postFiltering')
+	,url = require('url');
 ;
 
 module.exports.renderTemplate = function(req, res) {
@@ -54,13 +55,19 @@ module.exports.getBusiness = function(req, res) {
 
 module.exports.getHotelJson = function(req, res) {
 	var hotelId = req.params.hotel_id;
+	
+	var queryData = url.parse(req.url, true).query;
+	var data = {
+		"lat" : queryData.lat,
+		"longi" : queryData.longi
+	};
 	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetHotel(hotelId, function(error, hotels) {
 		if (error) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		postFiltering.generateFinalReco(hotels,function(finalResponse){
+		postFiltering.generateFinalReco(hotels,data,function(finalResponse){
 
 			return res.status(200).send(finalResponse);
 			//return finalResponse;
@@ -88,13 +95,19 @@ module.exports.getGymJson = function(req, res) {
 
 module.exports.getBarJson = function(req, res) {
 	var barId = req.params.bar_id;
+	var queryData = url.parse(req.url, true).query;
+	var data = {
+		"lat" : queryData.lat,
+		"longi" : queryData.longi
+	};
+
 	env.io.emit('request', 'Received request: ' + req.method + ': ' + req.baseUrl + req.path);
 	apiModel.dbGetBar(barId, function(error, bars) {
 		if (error) {
 			logger.log('Error from database: ' + error);
 			return res.render('Errorpage', {error: error});
 		}
-		postFiltering.generateFinalReco(bars,function(finalResponse){
+		postFiltering.generateFinalReco(bars,data,function(finalResponse){
 
 			return res.status(200).send(finalResponse);
 			//return finalResponse;

@@ -20,7 +20,8 @@
 		"byline": "*",
 		"os-utils": "*",
 		"socket.io": "*",
-		"geolib": "*"
+		"geolib": "*",
+		"url":"*"
   	},
 	"scripts": {
 		"start": "node ./server.js"
