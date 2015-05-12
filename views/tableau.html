@@ -19,20 +19,69 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+
     <link rel="shortcut icon" type="image/png" href="https://github.com/nitsnwits/wewatch/blob/master/views/img/favicon.png">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Varela" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!--  dhurv's edition  -->
     <meta charset="utf-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content="initial-scale=1.0, width=device-width" name="viewport">
-  <title>Errors</title>
+  <title>Home</title>
 
   <link href="css/base.min.css" rel="stylesheet">
   <style type="text/css">
+  div.card div.card-main div.card-img
+  {
+    overflow: visible;
+  }
+    .card-img div.front
+    {
+      overflow: visible;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform: perspective(500px) rotateY(0deg);
+      backface-visibility: hidden;
+      transition: transform .7s linear 0s;
+      -webkit-box-flex:1;-moz-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1
+    }
+    .card-img > .back
+    {
+      overflow: visible;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform: perspective(500px) rotateY(180deg);
+      backface-visibility: hidden;
+      transition: transform .7s linear 0s;
+      -webkit-box-flex:1;-moz-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1
+    }
+
+    .card-img:hover   > .front
+    {
+      overflow:visible;
+      transform: perspective(500px) rotateY(-180deg);
+      -webkit-box-flex:1;-moz-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1
+    }
+    .card-img:hover  > .back
+    {
+      overflow:visible;
+      transform: perspective(500px) rotateY(0deg);
+      -webkit-box-flex:1;-moz-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1
+    }
     .home-container{
       margin-left: 17%;
     }
+
     .fade {
       opacity: 0.5;
       transition: opacity .25s ease-in-out;
@@ -40,13 +89,16 @@
       -webkit-transition: opacity .25s ease-in-out;
       
     }
+
    .fade:hover {
       opacity: 1;
     }
+
     .rest-background {
-      background-image: url("img/food1.jpg");
+      background-image: url("img/hotel.png");
       
     }
+
     .common_bg{
       height: 200px;
       position: absolute;
@@ -56,13 +108,32 @@
       bottom: 0;
       background-repeat: no-repeat;
       background-size: contain;
-      opacity: 0.5;
-      transition: opacity .25s ease-in-out;
-      -moz-transition: opacity .25s ease-in-out;
-      -webkit-transition: opacity .25s ease-in-out;
+      
     }
+
+    .recotable{
+      opacity: 1;
+      height: 75%;
+      font-size: larger;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .bar-background {
+      background-image: url("img/bar.png");
+    } 
+
+    .gym-background {
+      background-image: url("img/gym.png");
+    } 
+
+    .books-background {
+      background-image: url("img/book.png");
+    } 
+
+
   </style>
-  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
   </head>
   <body class="skin-blue">
     <div class="wrapper">
@@ -78,9 +149,9 @@
         <section class="sidebar">
           <!-- Sidebar user panel -->
           <div class="user-panel">
-            <div class="pull-left image">
-          <!--    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" /> -->
-            </div>
+          <!--  <div class="pull-left image">
+              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+            </div> -->
             <div class="pull-left info">
               <p>{{userName}}</p>
 
@@ -100,7 +171,32 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-
+          <!--  <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="index.html"><i class="fa fa-angle-double-right"></i> Dashboard v1</a></li>
+                <li class="active"><a href="index2.html"><i class="fa fa-angle-double-right"></i> Dashboard v2</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="pages/widgets.html">
+                <i class="fa fa-th"></i> <span>Widgets</span>
+              </a>
+            </li> -->
+           <!-- <li class="treeview">
+              <a href="#">
+                <i class="fa fa-bar-chart-o"></i>
+                <span>Charts</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
+                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
+                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+              </ul>
+            </li> -->
             <li class="treeview">
               <a href="/Home">
                 <span>Home</span>    
@@ -123,12 +219,7 @@
             </li>       
             <li class="treeview">
               <a href="#">
-                <span>Global Visualization</span>
-              </a>
-            </li>   
-            <li class="treeview">
-              <a href="#">
-                <span>About</span>
+                <span>Globe</span>
               </a>
             </li>   
              <li class="treeview">
@@ -140,44 +231,29 @@
               <a href="/tableau">
                 <span>Tableau Visualizations</span>
               </a>
-            </li>   
+            </li> 
+            <li class="treeview">
+              <a href="#">
+                <span>About</span>
+              </a>
+            </li>     
             <li class="treeview">
               <a href="/logout">
                 <span>Logout</span>
               </a>
             </li>  
-               
-            <li class="treeview">
+           
+             <li class="treeview">
               <a href="#">
                 <span></span>
               </a>
             </li>  
-
-            <li class="treeview">
+             <li class="treeview">
               <a href="#">
                 <span></span>
               </a>
             </li>  
-
-            <li class="treeview">
-              <a href="#">
-                <span></span>
-              </a>
-            </li>  
-
-            <li class="treeview">
-              <a href="#">
-                <span></span>
-              </a>
-            </li>  
-
-            <li class="treeview">
-              <a href="#">
-                <span></span>
-              </a>
-            </li>  
-
-            <li class="treeview">
+             <li class="treeview">
               <a href="#">
                 <span></span>
               </a>
@@ -193,96 +269,20 @@
 
       <div class = "home-container">
         <div class="content-inner">
-          <div class="container">
-            <table style="width:100%">
-              <tr>
-                <td><div id="chart_div1"></div></td>
-                <td><div id="chart_div2"></div></td> 
-                <td><div id="chart_div3"></div></td>
-              </tr>
-            </table>
-          </div>
-        </div>
+      <div class="container">
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 982px; height: 742px;'><noscript><a href='#'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sq&#47;SquareYelp&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='982' height='742' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='SquareYelp&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sq&#47;SquareYelp&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 982px; height: 742px;'><noscript><a href='https:&#47;&#47;public.tableau.com&#47;bubbleyelp'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;BubbleYelp&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='982' height='742' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='BubbleYelp&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;BubbleYelp&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
       </div>
-      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-      <script src="js/jquery.js"></script>
-      <script type="text/javascript">
-            google.load("visualization", "1", {packages:["gauge"]});
-            google.setOnLoadCallback(drawChart);
-            function drawChart(stats) {
+    </div>
+      </div>
 
-              if (!stats) {
-                var data = google.visualization.arrayToDataTable([
-                  ['Label', 'Value'],
-                  ['Memory', 80],
-                  ['Cpu Free', 55],
-                  ['Cpu Usage', 68]
-                ]);
-              }
-
-              if (stats) {
-                var dataMemory = google.visualization.arrayToDataTable([
-                  ['Label', 'Value'],
-                  ['Free Memory', Math.round(stats.freeMem * 100)]
-                ]);
-                var dataCpuUsage = google.visualization.arrayToDataTable([
-                  ['Label', 'Value'],
-                  ['Cpu Usage', Math.round(stats.cpuUsage * 100)]
-                ]);
-                var dataCpuFree = google.visualization.arrayToDataTable([
-                  ['Label', 'Value'],
-                  ['Cpu Free', Math.round(stats.cpuFree * 100)] 
-                ]);
-              }
-
-              var optionsMemory = {
-                width: 800, height: 400,
-                redFrom: 0, redTo: 10,
-                yellowFrom:10, yellowTo: 30,
-                minorTicks: 5
-              };
-
-              var optionsCpuUsage = {
-                width: 800, height: 400,
-                redFrom: 90, redTo: 100,
-                yellowFrom: 70, yellowTo: 90,
-                minorTicks: 5
-              };
-
-              var optionsCpuFree = {
-                width: 800, height: 400,
-                redFrom: 0, redTo: 10,
-                yellowFrom: 10, yellowTo: 30,
-                minorTicks: 5
-              };
-
-              var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
-              var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-              //var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
-
-              chart1.draw(dataMemory, optionsMemory);
-              chart2.draw(dataCpuUsage, optionsCpuUsage);
-              //chart3.draw(dataCpuFree, optionsCpuFree);
-            }
-        
-        setInterval(function() {
-          $.ajax({
-            url: '/cpu.json',
-            method: 'GET',
-            cache: false,
-            dataType: 'json',
-            success: function(data) {
-              drawChart(data);
-            },
-            error: function() {
-              $('#result').html('<div class="alert alert-danger" role="alert">Could not load statistics.</div>');
-            }
-          });
-        }, 3000);     
-      </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+
     <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js" type="text/javascript"></script>
+    <script src="js/recommendation.js" type="text/javascript"></script>
     <!-- Sparkline -->
     <script src="plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
     <!-- jvectormap -->
@@ -298,5 +298,14 @@
     <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard2.js" type="text/javascript"></script>
+    
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js" type="text/javascript"></script>
+
   </body>
 </html>
