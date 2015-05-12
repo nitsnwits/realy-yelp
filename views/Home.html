@@ -41,6 +41,7 @@
   div.card div.card-main div.card-img
   {
     overflow: visible;
+
   }
     .card-img div.front
     {
@@ -107,6 +108,7 @@
       bottom: 0;
       background-repeat: no-repeat;
       background-size: contain;
+      background-color: white;
       
     }
 
@@ -120,14 +122,17 @@
 
     .bar-background {
       background-image: url("img/bar.png");
+      max-width:100%;
     } 
 
     .gym-background {
       background-image: url("img/gym.png");
+      max-width:100%;
     } 
 
     .books-background {
       background-image: url("img/book.png");
+      max-width:100%;
     } 
 
 
@@ -143,7 +148,7 @@
         <!-- Header Navbar: style can be found in header.less -->
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      <div class="main-sidebar">
+      <div class="main-sidebar" style="min-height:2000px;">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
@@ -236,61 +241,7 @@
                 <span>Logout</span>
               </a>
             </li>  
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-
-            </li>
-            <li class="treeview">
-              
-            </li>
-            
+            </ul>            
       </div>         
          <ul class="nav nav-tabs" role="tablist">
             <li ><a id="rest">Restaurant</a></li> <!-- class="active"-->
@@ -300,7 +251,7 @@
       
     </div>
 
-      <div class = "home-container">
+      <div class = "home-container" style="background-color:rgba(34, 45, 50, 0.59);">
         <div class="content-inner">
       <div class="container">
         <div class="card-wrap">
@@ -438,12 +389,14 @@
         </div>
       </div>
     </div>
-    <div> <h2>Similarity</h2>
-    <div id="chart"></div></div>
-    <div> <h2>Common support</h2>
-        <div id="chart2"></div></div>
-
+    <div class="row">
+    <div> <h2 style="color:white; text-align:center;">Similarity</h2></div>
+    <div id="chart"></div>
+    <div> <h2 style="color:white; text-align:center;">Common support</h2></div>
+        <div id="chart2" style="float:left;"></div>
       </div>
+
+</div><!-- end home-container -->
 
       
 

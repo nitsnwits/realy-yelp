@@ -167,27 +167,27 @@ $(document).ready(function()
                 $("#"+divid).empty();    
              var pie = new d3pie(divid, {
               header: {
-          title: { 
-          }
-        },
-          size: {
-          canvasHeight: 600,
-          canvasWidth: 700
-        },
-        data: {
-          content: [
+                title: { 
+                }
+              },
+               size: {
+               canvasHeight: 600,
+               canvasWidth: 700
+               },
+              data: {
+                content: [
 
-            
-            { label: names[0], value: similarity[0], color: '#e6211a'},
-            { label:  names[1], value:similarity[1], color: '#a7211d'},
-            { label:  names[2], value: similarity[2],color :'#e69595'},
-                  { label:  names[3], value: similarity[3],color : '#eb4d48'},
-                  { label:  names[4], value: similarity[4], color : '#d43f3a'},
-                  { label:  names[5], value: similarity[5], color : '#690400'},
-          ]
-        }
+                  
+                  { label: names[0], value: similarity[0], color: '#e6211a'},
+                  { label:  names[1], value:similarity[1], color: '#a7211d'},
+                  { label:  names[2], value: similarity[2],color :'#e69595'},
+                        { label:  names[3], value: similarity[3],color : '#eb4d48'},
+                        { label:  names[4], value: similarity[4], color : '#d43f3a'},
+                        { label:  names[5], value: similarity[5], color : '#690400'},
+                ]
+              }
       });
     
-    }
+  }
 
 });
