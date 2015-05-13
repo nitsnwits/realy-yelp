@@ -21,8 +21,13 @@ $(document).ready(function()
 
 	function fetchRecommendation(businessType){
 
-		
+		//hotel: M2SjLXsuAy5RNKwxaA5E1g
+//bar: KZfhb_wZj1qqKMJIN0PF7Q
+
+
+
 		//alert($("#hidden").val())
+   // console.log(userName);
 		var ajax_url = "";
         var businessId = $("#hidden").val();
         if(businessType=="rest")	         
@@ -47,8 +52,6 @@ $(document).ready(function()
                   //alert("no rest");
                   noResult(businessType);
                 }else{
-
-
                 	populate(businessType,output_string);
                   d3piechart(output_string,'similarity','chart');
                   d3piechart(output_string,'commonsupport','chart2');
@@ -99,7 +102,7 @@ $(document).ready(function()
         	imgclass = "bar-background common_bg";
 
 
-    var d = new Date();
+      var d = new Date();
       
       var hour = d.getHours();
       var weekday = new Array(7);
@@ -134,7 +137,7 @@ $(document).ready(function()
 
 	}
 	
-    function timefilter(similar_items){
+   /* function timefilter(similar_items){
     	var d = new Date();
 	    var day = new d.getDay();
 	    var hour = d.getHours();
@@ -150,7 +153,7 @@ $(document).ready(function()
 				
 			 }
 		  }
-    }
+    }*/
 
 
 

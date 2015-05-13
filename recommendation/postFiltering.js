@@ -98,27 +98,30 @@ function getBusinessFromIds(business_id,callback) {
  	function locationFilter(similar_items,callback){
 		var distance_th; //initialize to some value
 		var close_buisnesses = [];
+		//biz id = M2SjLXsuAy5RNKwxaA5E1g
 		//similar_items =  JSON.parse(similar_items);
 		//console.log(similar_items);
-		var longi = 37.3353;
-		var lat = 121.8813; 
+		//lat:36.092
+ //long: 115.1758
+		var longi = 111.1758;
+		var lat = 33.092; 
 		
 		for(var attributename in similar_items){
    			 //console.log(attributename+"--->: "+ similar_items[attributename]["0"]._id);
    			// console.log(Object.keys(similar_items[attributename]["0"]['_doc']));
-   			var longitude = similar_items[attributename]["0"]['_doc'].longitude;
+   			var longitude = similar_items[attributename]["0"]['_doc'].longitude * -1;
 			var latitude = similar_items[attributename]["0"]['_doc'].latitude;
 			//console.log(longitude + "     " + latitude);
 			//var distance = Math.sqrt(Math.pow((longitude - longi), 2) + Math.pow((latitude - lat), 2));
 			var distance = dist(latitude,longitude,lat,longi);
 			distance = distance/100000;
-			//console.log(distance);
+			console.log(distance);
 
 			/*for(var i = 0; i < )*/
 
 
 			//console.log(buffer);
-			if(distance < 164.5){ // condition yet to write
+			if(distance < 5){ // condition yet to write
 				
 				close_buisnesses.push(similar_items[attributename]["0"]);
 				
@@ -134,7 +137,8 @@ function getBusinessFromIds(business_id,callback) {
     function timefilter(similar_items,callback){
     	var d = new Date();
 	    
-	    var hour = d.getHours();
+	    var hour = parseInt(d.getHours());
+	    console.log("curretn time : " + hour);
 	    var weekday = new Array(7);
 		weekday[0]=  "Sunday";
 		weekday[1] = "Monday";
@@ -145,7 +149,7 @@ function getBusinessFromIds(business_id,callback) {
 		weekday[6] = "Saturday";
 
 		var day = weekday[d.getDay()];
-
+		//console.log("day is " + day);
 	    var openBusiness = [];
 	    var responseCount = 0;
 	  //  console.log(JSON.stringify(similar_items));
@@ -162,7 +166,9 @@ function getBusinessFromIds(business_id,callback) {
    			 	
    			var open = similar_items[attributename]['_doc'].hours[day].open;
 			var close = similar_items[attributename]['_doc'].hours[day].close;
-		//	console.log(open + "     " + close);
+		 	open = parseInt(open.split(":")[0]);
+		 	close = parseInt(close.split(":")[0]);
+		 	console.log(open + "     " + close + " hours " + hour);
 			
 			//REmove this 'if' for getting result when fetching wo working hours
 			if(hour>open && hour<close){ // condition yet to write
@@ -181,7 +187,8 @@ function getBusinessFromIds(business_id,callback) {
 				
 			}
 		}
-		//console.log("came here");
+		//console.log("-----------------"+openBusiness);
+
 		callback(openBusiness);
     }
 
