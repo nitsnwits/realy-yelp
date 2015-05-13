@@ -13,6 +13,7 @@ var env = require("../config/environment")
 var Guser ;
 var Gbusinesses; 
 var GuserId;
+var Gdata = {};
 // encryption algorithm
 var algo = 'md5';
 
@@ -89,19 +90,21 @@ module.exports.postLogin = function(req, res) {
 			return res.render('Errorpage');
 		}
 		if (user.email === username && user.password === password) {
-			res.locals.userName = user.first_name;
-			Guser = user.first_name;
-			res.locals.businesses = user.businesses;
+			
 
-			res.locals.hotel = user.hotel;
-			res.locals.bar = user.bar;
-			res.locals.longi = user.longi;
-			res.locals.lat = user.lat;
+			Gdata = {
+				"userName" : user.first_name,
+				"businesses" : user.businesses,
+				"userId": user._id,
+				"hotel" : user.hotel,
+				"bar" : user.bar,
+				"longi" : user.longi,
+				"lat" : user.lat
+			};
+			
+			res.locals = Gdata;
 
-			Gbusinesses = user.businesses;
-
-			res.locals.userId = user._id;
-			GuserId = user._id;
+			
 			res.render('Home');
 			return;
 		} else {
@@ -112,10 +115,11 @@ module.exports.postLogin = function(req, res) {
 	});
 }
 
-module.exports.getHomePage = function(req , res){
+module.exports.getHomePage = function(req , res){/*
 	res.locals.userName = Guser;
 	res.locals.businesses = Gbusinesses;
-	res.locals.userId = GuserId;
+	res.locals.userId = GuserId;*/
+	res.locals = Gdata;
 	res.render('Home');
 	return;
 }
