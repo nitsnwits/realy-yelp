@@ -3,7 +3,7 @@
   "description": "Yelp real time recommender CMPE 239",
   "version": "1.0.0",
 	"dependencies": {
-		"express": ">4",
+		"express": "4",
 		"underscore": "1.5.2",
 		"forever": "0.10.9",
 		"request": "2.27.0",
